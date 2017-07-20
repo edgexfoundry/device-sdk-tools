@@ -52,7 +52,7 @@ public class SchedulerCallbackHandler {
 	public SchedulerCallbackHandler() {
 	}
 	
-	public boolean handlePUT(CallbackAlert data) {
+	public boolean handlePut(CallbackAlert data) {
 		ActionType action = data.getType();
 		switch(action) {
 			case SCHEDULE:
@@ -79,7 +79,7 @@ public class SchedulerCallbackHandler {
 		return true;
 	}
 
-	public boolean handlePOST(CallbackAlert data) {
+	public boolean handlePost(CallbackAlert data) {
 		ActionType action = data.getType();
 		switch(action) {
 			case SCHEDULE:
@@ -106,7 +106,7 @@ public class SchedulerCallbackHandler {
 		return true;
 	}
 
-	public boolean handleDELETE(CallbackAlert data) {
+	public boolean handleDelete(CallbackAlert data) {
 		ActionType action = data.getType();
 		switch(action) {
 			case SCHEDULE:
