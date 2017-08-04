@@ -34,13 +34,11 @@ public class ${Protocol name}Attribute {
 	public ${Protocol name}Attribute(Object attributes) {
 		try {
 			Gson gson = new Gson();
-			// 1. Java object to JSON, and save into a file
 			String jsonString = gson.toJson(attributes);
 			${Protocol name}Attribute thisObject = gson.fromJson(jsonString, this.getClass());
 			${CustomAttributesInitialization}
 			
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error("Cannot Construct ${Protocol name}Attribute: " + e.getMessage());
 		}
 	}
@@ -49,5 +47,4 @@ public class ${Protocol name}Attribute {
 	
 	${SetCustomAttributes}
 	
-
 }
