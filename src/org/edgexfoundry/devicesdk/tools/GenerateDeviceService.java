@@ -96,7 +96,7 @@ public class GenerateDeviceService
 		generateJavaClass(fullPath + protocol,		"ProtocolDriver");
 		generateJavaClass(fullPath + "/scheduling",	"ScheduleContext");
 		generateJavaClass(fullPath + "/scheduling",	"ScheduleEventExecutor");
-		generateJavaClass(fullPath + "/scheduling",	"ScheduleEventHTTPExecutor");
+		generateJavaClass(fullPath + "/scheduling",	"ScheduleEventHttpExecutor");
 		generateJavaClass(fullPath + "/scheduling",	"Scheduler");
 		generatePropertiesFiles(path);
 		generateProjectFiles(path);
