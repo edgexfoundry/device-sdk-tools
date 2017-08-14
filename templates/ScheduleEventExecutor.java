@@ -18,44 +18,44 @@
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
+
 package ${Package}.scheduling;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.edgexfoundry.domain.meta.ScheduleEvent;
 import org.edgexfoundry.support.logging.client.EdgeXLogger;
 import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ScheduleEventExecutor {
 
-	private static final EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(ScheduleEventExecutor.class);
+  private static final EdgeXLogger logger =
+      EdgeXLoggerFactory.getEdgeXLogger(ScheduleEventExecutor.class);
 
-	@Autowired
-	ScheduleEventHTTPExecutor httpExecutor;
-	
-	ScheduleEventExecutor() {
-		httpExecutor = new ScheduleEventHTTPExecutor();
-	}
+  @Autowired
+  ScheduleEventHttpExecutor httpExecutor;
 
-	public void execute(LinkedHashMap<String, ScheduleEvent> events) {
-		if(events == null) {
-			logger.error("schedule event list is null");
-		} else {
-			logger.debug("schedule event list contains " + events.size() + " events");
-			for(Map.Entry<String, ScheduleEvent> entry : events.entrySet()) {
-				execute(entry.getValue());
-			}
-		}
-	}
+  ScheduleEventExecutor() {
+    httpExecutor = new ScheduleEventHttpExecutor();
+  }
 
-	public void execute(ScheduleEvent event) {
-		// TODO: Refactor - when Addressable is refactored, create a factory 
-		// to handle the different execution types, MQTT, HTTP, TCP, etc.
-		logger.debug("executing event " + event.getId() + " '" + event.getName() + "'");
-		httpExecutor.execute(event);
-	}
+  public void execute(LinkedHashMap<String, ScheduleEvent> events) {
+    if (events == null) {
+      logger.error("schedule event list is null");
+    } else {
+      logger.debug("schedule event list contains " + events.size() + " events");
+      for (Map.Entry<String, ScheduleEvent> entry : events.entrySet()) {
+        execute(entry.getValue());
+      }
+    }
+  }
+
+  public void execute(ScheduleEvent event) {
+    // TODO: Refactor - when Addressable is refactored, create a factory
+    // to handle the different execution types, MQTT, HTTP, TCP, etc.
+    logger.debug("executing event " + event.getId() + " '" + event.getName() + "'");
+    httpExecutor.execute(event);
+  }
 }
 // SDK Scheduler Block -->
