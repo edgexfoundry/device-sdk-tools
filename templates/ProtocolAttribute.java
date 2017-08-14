@@ -17,37 +17,39 @@
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
+
 package ${Package}.domain;
 
+import com.google.gson.Gson;
 import org.edgexfoundry.support.logging.client.EdgeXLogger;
 import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
-import com.google.gson.Gson;
 
 public class ${Protocol name}Attribute {
-	
-	private final static EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(${Protocol name}Attribute.class);
-	
-	// Replace these attributes with the ${Protocol name}
-	// specific metadata needed by the ${Protocol name} Driver
-	${CustomAttributes}
-	
-	public ${Protocol name}Attribute(Object attributes) {
-		try {
-			Gson gson = new Gson();
-			// 1. Java object to JSON, and save into a file
-			String jsonString = gson.toJson(attributes);
-			${Protocol name}Attribute thisObject = gson.fromJson(jsonString, this.getClass());
-			${CustomAttributesInitialization}
-			
-		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error("Cannot Construct ${Protocol name}Attribute: " + e.getMessage());
-		}
-	}
-	
-	${GetCustomAttributes}
-	
-	${SetCustomAttributes}
-	
+
+  private static final EdgeXLogger logger =
+	  EdgeXLoggerFactory.getEdgeXLogger(${Protocol name}Attribute.class);
+
+  // Replace these attributes with the ${Protocol name}
+  // specific metadata needed by the ${Protocol name} Driver
+  ${CustomAttributes}
+
+  public ${Protocol name}Attribute(Object attributes) {
+    try {
+      Gson gson = new Gson();
+      // 1. Java object to JSON, and save into a file
+      String jsonString = gson.toJson(attributes);
+      ${Protocol name}Attribute thisObject = gson.fromJson(jsonString, this.getClass());
+      ${CustomAttributesInitialization}
+
+    } catch (Exception e) {
+      //e.printStackTrace();
+      logger.error("Cannot Construct ${Protocol name}Attribute: " + e.getMessage());
+    }
+  }
+
+  ${GetCustomAttributes}
+
+  ${SetCustomAttributes}
 
 }
+
