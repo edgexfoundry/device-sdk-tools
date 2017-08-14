@@ -19,23 +19,23 @@
  *******************************************************************************/
 package ${Package}.controller;
 
+import org.edgexfoundry.support.logging.client.EdgeXLogger;
+import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.edgexfoundry.support.logging.client.EdgeXLogger;
-import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
-
 @RestController
 @RequestMapping("/api/v1/ping")
 public class StatusController {
 
-	private final static EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(StatusController.class);
+  private static final EdgeXLogger logger =
+      EdgeXLoggerFactory.getEdgeXLogger(StatusController.class);
 
-	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody String ping() {
-		logger.debug("Device service pinged - yes its up!");
-		return "pong";
-	}
+  @RequestMapping(method = RequestMethod.GET)
+  public @ResponseBody String ping() {
+    logger.debug("Device service pinged - yes its up!");
+    return "pong";
+  }
 }
