@@ -20,53 +20,53 @@
  *******************************************************************************/
 package ${Package}.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import org.edgexfoundry.domain.meta.CallbackAlert;
 import org.edgexfoundry.exception.controller.ServiceException;
 import ${Package}.handler.SchedulerCallbackHandler;
 import org.edgexfoundry.support.logging.client.EdgeXLogger;
 import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ScheduleController {
 
-	@Autowired
-	private SchedulerCallbackHandler callbackHandler;
+  @Autowired
+  private SchedulerCallbackHandler callbackHandler;
 
-	private static final EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(ScheduleController.class);
+  private static final EdgeXLogger logger =
+      EdgeXLoggerFactory.getEdgeXLogger(ScheduleController.class);
 
-	public String handlePUT(@RequestBody CallbackAlert data) {
-		try {
-			logger.debug("put callback : '" + data + "'");
-			return (callbackHandler.handlePUT(data) == true) ? "true" : "false";
-		} catch (Exception e) {
-			logger.error("put error : " + e.getMessage());
-			throw new ServiceException(e);
-		}
-	}
+  public String handlePut(@RequestBody CallbackAlert data) {
+    try {
+      logger.debug("put callback : '" + data + "'");
+      return (callbackHandler.handlePut(data) == true) ? "true" : "false";
+    } catch (Exception e) {
+      logger.error("put error : " + e.getMessage());
+      throw new ServiceException(e);
+    }
+  }
 
-	public String handlePOST(@RequestBody CallbackAlert data) {
-		try {
-			logger.debug("post callback : '" + data + "'");
-			return (callbackHandler.handlePOST(data) == true) ? "true" : "false";
-		} catch (Exception e) {
-			logger.error("post error : " + e.getMessage());
-			throw new ServiceException(e);
-		}
-	}
+  public String handlePost(@RequestBody CallbackAlert data) {
+    try {
+      logger.debug("post callback : '" + data + "'");
+      return (callbackHandler.handlePost(data) == true) ? "true" : "false";
+    } catch (Exception e) {
+      logger.error("post error : " + e.getMessage());
+      throw new ServiceException(e);
+    }
+  }
 
-	public String handleDELETE(@RequestBody CallbackAlert data) {
-		try {
-			logger.debug("delete callback : '" + data + "'" );
-			return (callbackHandler.handleDELETE(data) == true) ? "true" : "false";
-		} catch (Exception e) {
-			logger.error("delete error : " + e.getMessage());
-			throw new ServiceException(e);
-		}
-	}
+  public String handleDelete(@RequestBody CallbackAlert data) {
+    try {
+      logger.debug("delete callback : '" + data + "'");
+      return (callbackHandler.handleDelete(data) == true) ? "true" : "false";
+    } catch (Exception e) {
+      logger.error("delete error : " + e.getMessage());
+      throw new ServiceException(e);
+    }
+  }
 
 }
 // SDK Scheduler Block -->

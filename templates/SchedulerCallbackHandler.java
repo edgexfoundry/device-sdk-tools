@@ -18,6 +18,7 @@
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
+
 package ${Package}.handler;
 
 import org.edgexfoundry.controller.ScheduleClient;
@@ -29,7 +30,6 @@ import org.edgexfoundry.domain.meta.ScheduleEvent;
 import ${Package}.scheduling.Scheduler;
 import org.edgexfoundry.support.logging.client.EdgeXLogger;
 import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,98 +38,114 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SchedulerCallbackHandler {
-	private final static EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(SchedulerCallbackHandler.class);
 
-	@Autowired
-	private Scheduler scheduler;
-	
-	@Autowired	
-	private ScheduleClient scheduleClient;
+  private static final EdgeXLogger logger =
+      EdgeXLoggerFactory.getEdgeXLogger(SchedulerCallbackHandler.class);
 
-	@Autowired	
-	private ScheduleEventClient scheduleEventClient;
+  @Autowired
+  private Scheduler scheduler;
 
-	public SchedulerCallbackHandler() {
-	}
-	
-	public boolean handlePUT(CallbackAlert data) {
-		ActionType action = data.getType();
-		switch(action) {
-			case SCHEDULE:
-				try {
-					Schedule schedule = scheduleClient.schedule(data.getId());
-					if(schedule != null) scheduler.updateScheduleContext(schedule);
-				} catch (Exception e) {
-					logger.error("failed to put schedule " + data.getId() + " " + e);
-					return false;
-				}
-				break;
-			case SCHEDULEEVENT:
-				try {
-					ScheduleEvent scheduleEvent = scheduleEventClient.scheduleEvent(data.getId());
-					if(scheduleEvent != null) scheduler.updateScheduleEventInScheduleContext(scheduleEvent);
-				} catch (Exception e) {
-					logger.error("failed to put schedule event " + data.getId() + " " + e);
-					return false;
-				}
-				break;
-			default:
-				break;
-		}
-		return true;
-	}
+  @Autowired
+  private ScheduleClient scheduleClient;
 
-	public boolean handlePOST(CallbackAlert data) {
-		ActionType action = data.getType();
-		switch(action) {
-			case SCHEDULE:
-				try {
-					Schedule schedule = scheduleClient.schedule(data.getId());
-					if(schedule != null) scheduler.createScheduleContext(schedule);
-				} catch (Exception e) {
-					logger.error("failed to post schedule " + data.getId() + " " + e);
-					return false;
-				}
-				break;
-			case SCHEDULEEVENT:
-				try {
-					ScheduleEvent scheduleEvent = scheduleEventClient.scheduleEvent(data.getId());
-					if(scheduleEvent != null) scheduler.addScheduleEventToScheduleContext(scheduleEvent);
-				} catch (Exception e) {
-					logger.error("failed to post schedule event " + data.getId() + " " + e);
-					return false;
-				}
-				break;
-			default:
-				break;
-		}
-		return true;
-	}
+  @Autowired
+  private ScheduleEventClient scheduleEventClient;
 
-	public boolean handleDELETE(CallbackAlert data) {
-		ActionType action = data.getType();
-		switch(action) {
-			case SCHEDULE:
-				try {
-					scheduler.removeScheduleById(data.getId());
-				} catch (Exception e) {
-					logger.error("failed to delete schedule " + data.getId() + " " + e);
-					return false;
-				}
-				break;
-			case SCHEDULEEVENT:
-				try {
-					scheduler.removeScheduleEventById(data.getId());
-				} catch (Exception e) {
-					logger.error("failed to delete schedule " + data.getId() + " " + e);
-					return false;
-				}
-				break;
-			default:
-				break;
-		}
-		return true;
-	}
+  public SchedulerCallbackHandler() {
+  }
 
+  public boolean handlePut(CallbackAlert data) {
+    ActionType action = data.getType();
+    switch (action) {
+      case SCHEDULE:
+        try {
+          Schedule schedule = scheduleClient.schedule(data.getId());
+          if (schedule != null) {
+            scheduler.updateScheduleContext(schedule);
+          }
+        } catch (Exception e) {
+          logger.error("failed to put schedule " + data.getId() + " " + e);
+          return false;
+        }
+
+        break;
+      case SCHEDULEEVENT:
+        try {
+          ScheduleEvent scheduleEvent = scheduleEventClient.scheduleEvent(data.getId());
+          if (scheduleEvent != null) {
+            scheduler.updateScheduleEventInScheduleContext(scheduleEvent);
+          }
+        } catch (Exception e) {
+          logger.error("failed to put schedule event " + data.getId() + " " + e);
+          return false;
+        }
+
+        break;
+      default:
+        break;
+    }
+
+    return true;
+  }
+
+  public boolean handlePost(CallbackAlert data) {
+    ActionType action = data.getType();
+    switch (action) {
+      case SCHEDULE:
+        try {
+          Schedule schedule = scheduleClient.schedule(data.getId());
+          if (schedule != null) {
+            scheduler.createScheduleContext(schedule);
+          }
+        } catch (Exception e) {
+          logger.error("failed to post schedule " + data.getId() + " " + e);
+          return false;
+        }
+
+        break;
+      case SCHEDULEEVENT:
+        try {
+          ScheduleEvent scheduleEvent = scheduleEventClient.scheduleEvent(data.getId());
+          if (scheduleEvent != null) {
+            scheduler.addScheduleEventToScheduleContext(scheduleEvent);
+          }
+        } catch (Exception e) {
+          logger.error("failed to post schedule event " + data.getId() + " " + e);
+          return false;
+        }
+
+        break;
+      default:
+        break;
+    }
+    return true;
+  }
+
+  public boolean handleDelete(CallbackAlert data) {
+    ActionType action = data.getType();
+    switch (action) {
+      case SCHEDULE:
+        try {
+          scheduler.removeScheduleById(data.getId());
+        } catch (Exception e) {
+          logger.error("failed to delete schedule " + data.getId() + " " + e);
+          return false;
+        }
+
+        break;
+      case SCHEDULEEVENT:
+        try {
+          scheduler.removeScheduleEventById(data.getId());
+        } catch (Exception e) {
+          logger.error("failed to delete schedule " + data.getId() + " " + e);
+          return false;
+        }
+
+        break;
+      default:
+        break;
+    }
+    return true;
+  }
 }
 // SDK Scheduler Block -->
