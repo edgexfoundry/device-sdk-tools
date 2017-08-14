@@ -19,32 +19,30 @@
  *******************************************************************************/
 package ${Package};
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import ${Package}.data.DeviceStore;
 import ${Package}.scheduling.Scheduler;
 import org.edgexfoundry.support.logging.client.EdgeXLogger;
 import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class Initializer extends BaseService {
 
-	private final static EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(Initializer.class);
-	
-	@Autowired
-	DeviceStore devices;
-	
-	@Autowired
-	Scheduler schedules;
+  private static final EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(Initializer.class);
 
-	@Override
-	public boolean initialize(String deviceServiceId) {
-		// load the devices in cache.
-		devices.initialize(deviceServiceId);
-		schedules.initialize(getServiceName());
-		logger.info("Initialized device service successfully");
-		return true;
-	}
-	
+  @Autowired
+  DeviceStore devices;
+
+  @Autowired
+  Scheduler schedules;
+
+  @Override
+  public boolean initialize(String deviceServiceId) {
+    // load the devices in cache.
+    devices.initialize(deviceServiceId);
+    schedules.initialize(getServiceName());
+    logger.info("Initialized device service successfully");
+    return true;
+  }
 }
