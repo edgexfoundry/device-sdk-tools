@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @microservice:  device-sdk-tools
+ * @microservice: ${Service name}
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
@@ -31,20 +31,19 @@ import org.springframework.scheduling.annotation.EnableAsync;
 // import, then add the application.properties files to docker-core-config-seed
 //@EnableDiscoveryClient
 public class Application {
-	public static ConfigurableApplicationContext ctx;
+  public static ConfigurableApplicationContext ctx;
 
-	public static void main(String[] args) {
-		ctx = SpringApplication.run(Application.class, args);
-		String welcomeMsg = ctx.getEnvironment().getProperty("app.open.msg");
-		System.out.println(welcomeMsg);
-	}
-	
-	public static void exit(int rc) {
-		if(ctx != null) {
-			SpringApplication.exit(ctx, () -> rc);
-		} else {
-			System.exit(rc);
-		}
-	}
+  public static void main(String[] args) {
+    ctx = SpringApplication.run(Application.class, args);
+    String welcomeMsg = ctx.getEnvironment().getProperty("app.open.msg");
+    System.out.println(welcomeMsg);
+  }
 
+  public static void exit(int rc) {
+    if (ctx != null) {
+      SpringApplication.exit(ctx, () -> rc);
+    } else {
+      System.exit(rc);
+    }
+  }
 }

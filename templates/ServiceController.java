@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @microservice:  device-sdk-tools
+ * @microservice: ${Service name}
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
 package ${Package}.controller;
 
+import ${Package}.data.ObjectStore;
+import ${Package}.handler.${Protocol name}Handler;
+import org.edgexfoundry.support.logging.client.EdgeXLogger;
+import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,34 +30,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ${Package}.data.ObjectStore;
-import ${Package}.handler.${Protocol name}Handler;
-import org.edgexfoundry.support.logging.client.EdgeXLogger;
-import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
-
 @RestController
 @RequestMapping("/api/v1/")
 public class ServiceController {
 
-	private final static EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(ServiceController.class);
-	
-	@Autowired
-	ObjectStore objects;
-	
-	@Autowired
-	${Protocol name}Handler handler;
+  private static final EdgeXLogger logger =
+      EdgeXLoggerFactory.getEdgeXLogger(ServiceController.class);
 
-	@RequestMapping(path = "/debug/transformData/{transformData}", method = RequestMethod.GET)
-	public @ResponseBody String setTransformData(@PathVariable Boolean transformData) {
-		logger.info("Setting transform data to: " + transformData);
-		objects.setTransformData(transformData);
-		return "Set transform data to: " + transformData;
-	}
-	
-	@RequestMapping(path = "/discovery", method = RequestMethod.POST)
-	public @ResponseBody String doDiscovery() {
-		logger.info("Running discovery request");
-		handler.scan();
-		return "Running discovery";
-	}
+  @Autowired
+  ObjectStore objects;
+
+  @Autowired
+  ${Protocol name}Handler handler;
+
+  @RequestMapping(path = "/debug/transformData/{transformData}", method = RequestMethod.GET)
+  public @ResponseBody String setTransformData(@PathVariable Boolean transformData) {
+    logger.info("Setting transform data to: " + transformData);
+    objects.setTransformData(transformData);
+    return "Set transform data to: " + transformData;
+  }
+
+  @RequestMapping(path = "/discovery", method = RequestMethod.POST)
+  public @ResponseBody String doDiscovery() {
+    logger.info("Running discovery request");
+    handler.scan();
+    return "Running discovery";
+  }
 }

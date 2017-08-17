@@ -13,28 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @microservice:  device-sdk-tools
+ * @microservice: ${Service name}
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
 package ${Package};
 
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-
 import org.edgexfoundry.support.logging.client.EdgeXLogger;
 import org.edgexfoundry.support.logging.client.EdgeXLoggerFactory;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @EnableScheduling
 public class HeartBeat {
 
-	
-	private final static EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(HeartBeat.class);
+  private static final EdgeXLogger logger = EdgeXLoggerFactory.getEdgeXLogger(HeartBeat.class);
 
-	@Scheduled(fixedRateString = "${heart.beat.time}")
-	public void pulse() {
-		logger.info("This is the ${Service name} device service.");
-	}
-	
-
+  @Scheduled(fixedRateString = "${heart.beat.time}")
+  public void pulse() {
+    logger.info("This is the ${Service name} device service.");
+  }
 }

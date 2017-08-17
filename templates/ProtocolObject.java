@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @microservice:  device-sdk-tools
+ * @microservice: ${Service name}
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
+
 package ${Package}.domain;
 
 import ${Package}.domain.${Protocol name}Attribute;
@@ -24,28 +25,28 @@ import org.edgexfoundry.domain.meta.DeviceObject;
 
 public class ${Protocol name}Object extends DeviceObject {
 
-	private ${Protocol name}Attribute attributes;
+  private ${Protocol name}Attribute attributes;
 
-	public ${Protocol name}Object(DeviceObject object) {
-		this.setName(object.getName());
-		this.setTag(object.getTag());
-		this.setDescription(object.getDescription());
-		this.setProperties(object.getProperties());
-		this.setAttributes(new ${Protocol name}Attribute(object.getAttributes()));
-	}
-	
-	@Override
-	public ${Protocol name}Attribute getAttributes() {
-		return attributes;
-	}
-	
-	public void setAttributes(${Protocol name}Attribute attributes) {
-		this.attributes = attributes;
-	}
+  public ${Protocol name}Object(DeviceObject object) {
+    this.setName(object.getName());
+    this.setTag(object.getTag());
+    this.setDescription(object.getDescription());
+    this.setProperties(object.getProperties());
+    this.setAttributes(new ${Protocol name}Attribute(object.getAttributes()));
+  }
 
-	@Override
-	public String toString() {
-		return "${Protocol name}Object [ " + super.toString() + ", attributes=" + attributes + "]";
-	}
+  @Override
+  public ${Protocol name}Attribute getAttributes() {
+    return attributes;
+  }
+
+  public void setAttributes(${Protocol name}Attribute attributes) {
+    this.attributes = attributes;
+  }
+
+  @Override
+  public String toString() {
+    return "${Protocol name}Object [ " + super.toString() + ", attributes=" + attributes + "]";
+  }
 
 }

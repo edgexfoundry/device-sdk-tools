@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @microservice:  device-sdk-tools
+ * @microservice: ${Service name}
  * @author: Tyler Cox, Dell
  * @version: 1.0.0
  *******************************************************************************/
+
 package ${Package}.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,37 +29,37 @@ import ${Package}.data.WatcherStore;
 @Service
 public class UpdateHandler {
 
-	@Autowired
-	private WatcherStore watchers;
-	
-	@Autowired
-	private DeviceStore devices;
-	
-	public boolean addDevice(String deviceId) {
-		return devices.add(deviceId);
-	}
+  @Autowired
+  private WatcherStore watchers;
 
-	public boolean updateDevice(String deviceId) {
-		return devices.update(deviceId);
-	}
+  @Autowired
+  private DeviceStore devices;
 
-	public boolean deleteDevice(String deviceId) {
-		return devices.remove(deviceId);
-	}
-	
-	public boolean addWatcher(String provisionWatcher) {
-		return watchers.add(provisionWatcher);
-	}
-	
-	public boolean removeWatcher(String provisionWatcher) {
-		return watchers.remove(provisionWatcher);
-	}
-	
-	public boolean updateWatcher(String provisionWatcher) {
-		return watchers.update(provisionWatcher);
-	}
+  public boolean addDevice(String deviceId) {
+    return devices.add(deviceId);
+  }
 
-	public boolean updateProfile(String profileId) {
-		return devices.updateProfile(profileId) && watchers.updateProfile(profileId);
-	}
+  public boolean updateDevice(String deviceId) {
+    return devices.update(deviceId);
+  }
+
+  public boolean deleteDevice(String deviceId) {
+    return devices.remove(deviceId);
+  }
+
+  public boolean addWatcher(String provisionWatcher) {
+    return watchers.add(provisionWatcher);
+  }
+
+  public boolean removeWatcher(String provisionWatcher) {
+    return watchers.remove(provisionWatcher);
+  }
+
+  public boolean updateWatcher(String provisionWatcher) {
+    return watchers.update(provisionWatcher);
+  }
+
+  public boolean updateProfile(String profileId) {
+    return devices.updateProfile(profileId) && watchers.updateProfile(profileId);
+  }
 }
