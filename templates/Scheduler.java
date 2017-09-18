@@ -33,11 +33,11 @@ import org.edgexfoundry.controller.AddressableClient;
 import org.edgexfoundry.controller.DeviceServiceClient;
 import org.edgexfoundry.controller.ScheduleClient;
 // <-- SDK Scheduler Block
-import org.edgexfoundry.controller.ScheduleClientImpl;
+import org.edgexfoundry.controller.impl.ScheduleClientImpl;
 // SDK Scheduler Block -->
 import org.edgexfoundry.controller.ScheduleEventClient;
 // <-- SDK Scheduler Block
-import org.edgexfoundry.controller.ScheduleEventClientImpl;
+import org.edgexfoundry.controller.impl.ScheduleEventClientImpl;
 // SDK Scheduler Block -->
 import ${Package}.domain.SimpleSchedule;
 import ${Package}.domain.SimpleScheduleEvent;
