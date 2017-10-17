@@ -25,6 +25,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<nexusproxy>https://nexus.edgexfoundry.org</nexusproxy>
+		<repobasepath>content/repositories</repobasepath>
 	</properties>
 
 	<parent>
@@ -123,9 +125,14 @@
 	</build>
 	<repositories>
 		<repository>
-			<id>org.edgexfoundry</id>
-			<name>EdgeX Foundry Nexus Repository</name>
-			<url>${nexusproxy}/content/groups/public/</url>
+			<id>snapshots</id>
+			<name>EdgeX Snapshots Repository</name>
+			<url>${nexusproxy}/${repobasepath}/snapshots</url>
+		</repository>
+		<repository>
+			<id>staging</id>
+			<name>EdgeX Staging Repository</name>
+			<url>${nexusproxy}/${repobasepath}/staging</url>
 		</repository>
 	</repositories>
 </project>
