@@ -73,7 +73,6 @@ public class DeviceStore {
     if (devices.containsKey(device.getName())) {
       devices.remove(device.getName());
       ${Protocol name}.disconnectDevice(device);
-      deviceClient.updateOpState(device.getId(), OperatingState.DISABLED.name());
       profiles.removeDevice(device);
     }
     return true;
